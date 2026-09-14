@@ -25,7 +25,7 @@
             padding: 20px;
         }
 
-        /* القلوب المتساقطة */
+        /* القلوب المتساقطة الحمراء */
         .heart-fall {
             position: fixed;
             top: -10%;
@@ -110,22 +110,31 @@
             margin: 30px 0;
         }
 
+        .envelope-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+
         .envelope {
-            width: 260px;
-            height: 160px;
+            width: 280px;
+            height: 170px;
             background-color: #e60023;
             border-radius: 15px;
             position: relative;
             cursor: pointer;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             box-shadow: 0 8px 20px rgba(230, 0, 35, 0.25);
             transition: transform 0.3s ease;
+            padding: 10px;
         }
 
         .envelope:hover {
-            transform: scale(1.05);
+            transform: scale(1.03);
         }
 
         .envelope::before {
@@ -134,35 +143,53 @@
             top: 0;
             width: 0;
             height: 0;
-            border-left: 130px solid transparent;
-            border-right: 130px solid transparent;
-            border-top: 85px solid #c4001d;
+            border-left: 140px solid transparent;
+            border-right: 140px solid transparent;
+            border-top: 90px solid #c4001d;
         }
 
         .envelope-heart {
             color: #ffffff;
-            font-size: 40px;
+            font-size: 35px;
             z-index: 2;
             filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
         }
 
+        .envelope-title {
+            color: #ffffff;
+            font-size: 0.9rem;
+            font-weight: bold;
+            z-index: 2;
+            margin-top: 5px;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+        }
+
+        /* الرسالة والصورة جوة الجواب */
         .card-message {
             display: none;
-            background: #fff5f6;
-            border: 1px solid #ffccd1;
-            padding: 15px;
-            border-radius: 12px;
-            margin-top: 10px;
-            width: 260px;
+            background: #fff0f2;
+            border: 2px dashed #ffccd1;
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 15px;
+            width: 280px;
             font-size: 0.95rem;
-            color: #444;
-            line-height: 1.6;
+            color: #333;
+            line-height: 1.7;
+            animation: fadeIn 0.5s ease;
+            text-align: right;
         }
 
         .card-message img {
             width: 100%;
-            border-radius: 8px;
-            margin-top: 10px;
+            border-radius: 10px;
+            margin-top: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         /* الجملة الأخيرة */
@@ -172,10 +199,10 @@
             color: #e60023;
             font-weight: bold;
             line-height: 1.8;
-            padding: 15px;
+            padding: 20px;
             background: #fff0f2;
             border-radius: 15px;
-            border: 1px dashed #e60023;
+            border: 2px dashed #e60023;
         }
     </style>
 </head>
@@ -186,7 +213,7 @@
         <source src="song.mp3" type="audio/mpeg">
     </audio>
 
-    <!-- شاشة تسجيل الدخول -->
+    <!-- شاشة كلمة السر -->
     <div id="login-screen">
         <h2>دي مفاجأة لروح قلبي وبنوتي ♥️🥰😍</h2>
         <input type="password" id="pass-input" placeholder="اكتبي الرقم السري هنا...">
@@ -197,38 +224,62 @@
     <div id="main-content">
         
         <div class="envelopes-container">
-            <!-- جواب 1 -->
-            <div>
+            
+            <!-- ظرف 1 -->
+            <div class="envelope-wrapper">
                 <div class="envelope" onclick="toggleCard('msg1')">
                     <span class="envelope-heart">♥️</span>
                 </div>
                 <div id="msg1" class="card-message">
-                    <p>رسالتك الأولى هنا...</p>
-                    <img src="photo1.jpg" alt="ذكرياتنا">
+                    <p>دي يعمري صورتنا الوحيدة اللي عندي لينا سوا كدة يموزتي ♥️😍 و دي كانت يوم ٩ شهر ٧ يعمري و كان يوم تحفة موووت اصلا انا فاكره كدة ♥️😂 زي كل ايامي معاكي يا روح قلبي و عمري انتي ♥️♥️🥰🫂 دي انا حاططها خلفية موبايلي اصلا من جوا يعمري و خلفية شات الواتس بتاع رقمي كملن من كتر م بحبها بالرغم اننا متنكرين فيها اليوم ده انا قولتلك بحبك ٦ مرات فيه كدة و فاكرهم يعمري ♥️♥️🥰🫂</p>
+                    <img src="photo1.jpg" alt="ذكرى جميلة">
                 </div>
             </div>
 
-            <!-- جواب 2 -->
-            <div>
+            <!-- ظرف 2 -->
+            <div class="envelope-wrapper">
                 <div class="envelope" onclick="toggleCard('msg2')">
                     <span class="envelope-heart">♥️</span>
                 </div>
                 <div id="msg2" class="card-message">
-                    <p>رسالتك الثانية هنا...</p>
-                    <img src="photo2.jpg" alt="ذكرياتنا">
+                    <p>دي يا روح قلبي الصورة اللي نزلتيها ستوري يوم م رجعتي من البلد لما وصلتك يموزتي ♥️♥️♥️♥️🥰🥰😂 بجد كان يوم تحفة برضو يعمري ساعتها و متتخليش بامانة الفرحة و الانبساط ساعتها يا روح قلبي لما كنت جاي اوصلك كدة ووفرحان انك معايا يعمري يارب دايما معايا يا روح قلبي و دايما اعرف اعملك اي حاجة يعمري نفسك فيها يا اجمل حاجة في حياتي كلها يا نور عيني ♥️♥️♥️🥰🥰🫂😍 و كالعادة يعمري كان يوم تحفة زي كل ايامي معاكي يا روح قلبي و انتي بتحلي اي يوم بجد و بتحلي اي حاجة اصلا يا نو عيني ♥️♥️♥️🥰🫂😍</p>
+                    <img src="photo2.jpg" alt="ذكرى جميلة">
                 </div>
             </div>
 
-            <!-- جواب 3 -->
-            <div>
+            <!-- ظرف 3 (بدون صورة + عنوان خاص) -->
+            <div class="envelope-wrapper">
                 <div class="envelope" onclick="toggleCard('msg3')">
                     <span class="envelope-heart">♥️</span>
+                    <span class="envelope-title">دوسي هنا يا مارينا دي رسالة مهمة اووي ♥️😂</span>
                 </div>
                 <div id="msg3" class="card-message">
-                    <p>رسالتك الثالثة هنا...</p>
-                    <img src="photo3.jpg" alt="ذكرياتنا">
+                    <p>احنا انهاردة يعمري كملنا ٤ شهور سوا بالظبط و يارب دايما العمر كلو سوا يا نور عيني ♥️♥️🥰😍 كملنا ١٢٠ يوم مع بعض ١٢٠ يوم يعمري بكلمك كل يوم و بقرفك ♥️♥️🥰😂 و ساعات بتنكدي عليا برضو بس علي قلبي زي العسل يا روح قلبي و كل حياتي اصلا ♥️♥️♥️🥰😍🫂 و حرفيا مش ناسي اي حاجة قولتهالي في اي يوم يعمري كدة من كل كلامك الحلو ده ♥️🥰😍 كفاية وجودك جنبي كل م بحتاجك يعمري و وجودك جنبي وقت زعلي علي جدتي لما اتوفت ♥️♥️🥰😍🫂 و وجودك جنبي في اي حاجة عموما انا بجد معنديش اغلي منك في حياتي كلها انتي عمري و قلبي و حياتي و بنتي و صحبتي و مراتي و كل حاجة ليا انا بحبك اوووووووووي بجد يا روح قلبي ♥️♥️♥️🥰🫂 ربنا يخليكي ليا يا اجمل حاجة في عمري كلو و يديمك نعمة في حياتي يا روح قلبي ♥️♥️♥️🥰🫂😍 عارفة يعمري ١٢٠ يوم كدة حرفيا وانا في كل ليلة بفكر فيكي قبل م انام و اول م اصحي كمان ♥️♥️🥰🫂 و هفضل طول عمري بفكر فيكي و في دماغي و عمرك م تغيبي عنها لحظة يا اجمل بنوتة شافتها عيني و روح قلبي اصلا حرفيا ♥️♥️♥️♥️🥰🫂😍</p>
                 </div>
             </div>
+
+            <!-- ظرف 4 -->
+            <div class="envelope-wrapper">
+                <div class="envelope" onclick="toggleCard('msg4')">
+                    <span class="envelope-heart">♥️</span>
+                </div>
+                <div id="msg4" class="card-message">
+                    <p>دي بقي ذكرة لينا كدة ده جيم يعمري فوزتي فيه انتي في سكرو الاربع راوندات ب صفر كدة ذكري مميزة برضو زيك بالظبط قولت تيجي معانا كدة يعمري ♥️♥️🥰😂😂</p>
+                    <img src="photo5.jpg" alt="ذكرياتنا">
+                </div>
+            </div>
+
+            <!-- ظرف 5 (بدون صورة + عنوان خاص) -->
+            <div class="envelope-wrapper">
+                <div class="envelope" onclick="toggleCard('msg5')">
+                    <span class="envelope-heart">♥️</span>
+                    <span class="envelope-title">كلمتين لروح قلبي ♥️🥰🫂</span>
+                </div>
+                <div id="msg5" class="card-message">
+                    <p>انا بجد حرفيا يا روح قلبي دول احسن ٤ شهور في حياتي كلها ومميزين زيك كدة بالظبط يا روح قلبي كلهم ايام حلوة كدة زيك برضو ♥️♥️🥰🫂😂 <br><br>و بجد يعمري عايز اقولك كلمتين من قلبي كدة حرفيا انا بجد بعشقك اوووووي و بحبك اووووي و مش شايف غيرك في الدنيا كلها بجد انتي احلي حاجة في حياتي كلها و روح قلبي اللي بموت فيها ♥️♥️♥️🥰🫂😍 و يارب دايما كدة يعمري ايامنا كلها تكون حلوة و هي حلوة بيكي اصلا يموزتي انتي ♥️♥️♥️🥰🫂😍</p>
+                </div>
+            </div>
+
         </div>
 
         <!-- الجملة الأخيرة -->
@@ -265,10 +316,10 @@
                 // تشغيل الأغنية فور فتح الصفحة
                 const music = document.getElementById('bg-music');
                 music.play().catch(error => {
-                    console.log("لم يتم تشغيل الصوت تلقائياً بسبب سياسة المتصفح");
+                    console.log("تعذر التشغيل التلقائي");
                 });
             } else {
-                alert("الباسوورد مش صح يا روح قلبي 😉 حاول تاني!");
+                alert("الباسوورد مش صح يا جميل 😉 حاول تاني!");
             }
         }
 
@@ -284,4 +335,3 @@
     </script>
 </body>
 </html>
-
