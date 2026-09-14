@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مفاجأة لروح قلبي</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #ffffff;
+            color: #333333;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow-x: hidden;
+            position: relative;
+            padding: 20px;
+        }
+
+        /* القلوب المتساقطة */
+        .heart-fall {
+            position: fixed;
+            top: -10%;
+            color: #e60023;
+            font-size: 20px;
+            user-select: none;
+            pointer-events: none;
+            z-index: 100;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(105vh) rotate(360deg); opacity: 0; }
+        }
+
+        /* شاشة كلمة السر */
+        #login-screen {
+            background: #ffffff;
+            border: 2px solid #ffe6e8;
+            padding: 30px 20px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(230, 0, 35, 0.1);
+            text-align: center;
+            max-width: 350px;
+            width: 100%;
+            z-index: 10;
+        }
+
+        #login-screen h2 {
+            color: #e60023;
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        #login-screen input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ffccd1;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 1.1rem;
+            outline: none;
+            margin-bottom: 15px;
+            transition: 0.3s;
+        }
+
+        #login-screen input:focus {
+            border-color: #e60023;
+        }
+
+        #login-screen button {
+            background: #e60023;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 10px;
+            font-size: 1rem;
+            cursor: pointer;
+            width: 100%;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(230, 0, 35, 0.2);
+        }
+
+        /* المحتوى الرئيسي */
+        #main-content {
+            display: none;
+            width: 100%;
+            max-width: 600px;
+            text-align: center;
+            z-index: 10;
+            padding-bottom: 40px;
+        }
+
+        /* الجوابات الكبيرة الحمراء */
+        .envelopes-container {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            align-items: center;
+            margin: 30px 0;
+        }
+
+        .envelope {
+            width: 260px;
+            height: 160px;
+            background-color: #e60023;
+            border-radius: 15px;
+            position: relative;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 8px 20px rgba(230, 0, 35, 0.25);
+            transition: transform 0.3s ease;
+        }
+
+        .envelope:hover {
+            transform: scale(1.05);
+        }
+
+        .envelope::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            width: 0;
+            height: 0;
+            border-left: 130px solid transparent;
+            border-right: 130px solid transparent;
+            border-top: 85px solid #c4001d;
+        }
+
+        .envelope-heart {
+            color: #ffffff;
+            font-size: 40px;
+            z-index: 2;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+        }
+
+        .card-message {
+            display: none;
+            background: #fff5f6;
+            border: 1px solid #ffccd1;
+            padding: 15px;
+            border-radius: 12px;
+            margin-top: 10px;
+            width: 260px;
+            font-size: 0.95rem;
+            color: #444;
+            line-height: 1.6;
+        }
+
+        .card-message img {
+            width: 100%;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+
+        /* الجملة الأخيرة */
+        .final-message {
+            margin-top: 40px;
+            font-size: 1.2rem;
+            color: #e60023;
+            font-weight: bold;
+            line-height: 1.8;
+            padding: 15px;
+            background: #fff0f2;
+            border-radius: 15px;
+            border: 1px dashed #e60023;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- الأغنية تشتغل في الخلفية -->
+    <audio id="bg-music" loop>
+        <source src="song.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- شاشة تسجيل الدخول -->
+    <div id="login-screen">
+        <h2>دي مفاجأة لروح قلبي وبنوتي ♥️🥰😍</h2>
+        <input type="password" id="pass-input" placeholder="اكتبي الرقم السري هنا...">
+        <button onclick="checkPassword()">افتحي المفاجأة ✨</button>
+    </div>
+
+    <!-- المحتوى بعد الباسوورد -->
+    <div id="main-content">
+        
+        <div class="envelopes-container">
+            <!-- جواب 1 -->
+            <div>
+                <div class="envelope" onclick="toggleCard('msg1')">
+                    <span class="envelope-heart">♥️</span>
+                </div>
+                <div id="msg1" class="card-message">
+                    <p>رسالتك الأولى هنا...</p>
+                    <img src="photo1.jpg" alt="ذكرياتنا">
+                </div>
+            </div>
+
+            <!-- جواب 2 -->
+            <div>
+                <div class="envelope" onclick="toggleCard('msg2')">
+                    <span class="envelope-heart">♥️</span>
+                </div>
+                <div id="msg2" class="card-message">
+                    <p>رسالتك الثانية هنا...</p>
+                    <img src="photo2.jpg" alt="ذكرياتنا">
+                </div>
+            </div>
+
+            <!-- جواب 3 -->
+            <div>
+                <div class="envelope" onclick="toggleCard('msg3')">
+                    <span class="envelope-heart">♥️</span>
+                </div>
+                <div id="msg3" class="card-message">
+                    <p>رسالتك الثالثة هنا...</p>
+                    <img src="photo3.jpg" alt="ذكرياتنا">
+                </div>
+            </div>
+        </div>
+
+        <!-- الجملة الأخيرة -->
+        <div class="final-message">
+            بحبك و بمووووت فيكي و بعشقك يا روح قلبي و دنيتي انتي ♥️♥️🥰🫂🌚
+        </div>
+
+    </div>
+
+    <script>
+        // تشغيل القلوب المتساقطة
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart-fall');
+            heart.innerHTML = '♥️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 3 + 2 + 's';
+            heart.style.fontSize = Math.random() * 15 + 15 + 'px';
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 5000);
+        }
+        setInterval(createHeart, 300);
+
+        // التحقق من الباسوورد وتشغيل الموسيقى
+        function checkPassword() {
+            const password = document.getElementById('pass-input').value;
+            if (password === "1552026") {
+                document.getElementById('login-screen').style.display = 'none';
+                document.getElementById('main-content').style.display = 'block';
+                
+                // تشغيل الأغنية فور فتح الصفحة
+                const music = document.getElementById('bg-music');
+                music.play().catch(error => {
+                    console.log("لم يتم تشغيل الصوت تلقائياً بسبب سياسة المتصفح");
+                });
+            } else {
+                alert("الباسوورد مش صح يا روح قلبي 😉 حاول تاني!");
+            }
+        }
+
+        // فتح وإغلاق الجوابات
+        function toggleCard(id) {
+            const msg = document.getElementById(id);
+            if (msg.style.display === "block") {
+                msg.style.display = "none";
+            } else {
+                msg.style.display = "block";
+            }
+        }
+    </script>
+</body>
+</html>
+
